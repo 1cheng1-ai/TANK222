@@ -73,7 +73,8 @@ export class BattleScene {
         hp,
         tank.fireCooldownMs,
         tank.moveSpeed,
-        tank.bulletSpeed
+        tank.bulletSpeed,
+        tank.bulletBounceCount
       );
       this.entities.addTank(tankEntity);
 

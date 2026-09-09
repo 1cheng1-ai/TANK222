@@ -70,15 +70,39 @@ export class CollisionSystem {
       const grid = this.toGrid(bullet.position);
       const obstacle = this.findObstacleAt(obstacles, grid);
       if (obstacle) {
-        bullet.destroy();
-        result.newExplosions.push(new Explosion(this.gridCenter(grid), 240, 0.5));
         if (obstacle.isDestructible()) {
+          bullet.destroy();
+          result.newExplosions.push(new Explosion(this.gridCenter(grid), 240, 0.5));
           obstacle.destroy();
+        } else {
+          if (bullet.bounce()) {
+            this.reboundPosition(bullet, grid);
+          } else {
+            bullet.destroy();
+            result.newExplosions.push(new Explosion(this.gridCenter(grid), 240, 0.5));
+          }
         }
       }
       if (this.isOutOfBounds(bullet.position)) {
         bullet.destroy();
       }
+    }
+  }
+
+  private reboundPosition(bullet: Bullet, grid: GridPos): void {
+    switch (bullet.direction) {
+      case 'up':
+        bullet.position.y = grid.row + 1;
+        break;
+      case 'down':
+        bullet.position.y = grid.row;
+        break;
+      case 'left':
+        bullet.position.x = grid.col + 1;
+        break;
+      case 'right':
+        bullet.position.x = grid.col;
+        break;
     }
   }
 

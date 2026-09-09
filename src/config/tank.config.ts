@@ -5,5 +5,6 @@ export const tankConfig: TankConfig = {
   computerHp: 1,
   moveSpeed: 0.004,
   fireCooldownMs: 500,
-  bulletSpeed: 0.012
+  bulletSpeed: 0.012,
+  bulletBounceCount: 1
 };

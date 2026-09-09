@@ -14,6 +14,7 @@ export class Tank {
   readonly fireCooldownMs: number;
   readonly moveSpeed: number;
   readonly bulletSpeed: number;
+  readonly bulletBounceCount: number;
   alive: boolean;
 
   constructor(
@@ -23,7 +24,8 @@ export class Tank {
     hp: number,
     fireCooldownMs: number,
     moveSpeed: number,
-    bulletSpeed: number
+    bulletSpeed: number,
+    bulletBounceCount: number = 0
   ) {
     this.id = createTankId();
     this.faction = faction;
@@ -35,6 +37,7 @@ export class Tank {
     this.fireCooldownMs = fireCooldownMs;
     this.moveSpeed = moveSpeed;
     this.bulletSpeed = bulletSpeed;
+    this.bulletBounceCount = bulletBounceCount;
     this.alive = true;
   }
 
@@ -69,7 +72,14 @@ export class Tank {
       return null;
     }
     this.cooldownMs = this.fireCooldownMs;
-    return new Bullet(this.id, this.faction, { ...this.position }, this.direction, this.bulletSpeed);
+    return new Bullet(
+      this.id,
+      this.faction,
+      { ...this.position },
+      this.direction,
+      this.bulletSpeed,
+      this.bulletBounceCount
+    );
   }
 
   takeDamage(): void {

@@ -36,6 +36,7 @@ export interface TankConfig {
   moveSpeed: number;
   fireCooldownMs: number;
   bulletSpeed: number;
+  bulletBounceCount: number;
 }
 
 export interface IGameConfig {
