@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.codeartsdoer/
+*.log
+.DS_Store
+*.local
+.vite/
